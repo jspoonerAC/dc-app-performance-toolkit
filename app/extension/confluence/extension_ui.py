@@ -7,6 +7,8 @@ from selenium_ui.conftest import print_timing
 from selenium_ui.confluence.pages.pages import Login, AllUpdates
 from util.conf import CONFLUENCE_SETTINGS
 
+# TODO Update space keys with those from testing instance
+SPACE_KEYS = ["TS", "CS"]
 
 def app_login_page(webdriver, datasets):
     @print_timing("selenium_app_specific_user_login")
@@ -31,9 +33,7 @@ def view_config_page(webdriver, datasets):
 
     @print_timing("selenium_approvals_view_config_page")
     def measure():
-        # TODO Uncomment code and replace
-        # page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/pages/viewpage.action/plugins/servlet/approvalmacro/system/configuration")
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/approvalmacro/system/configuration")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/approvalmacro/system/configuration")
         page.wait_until_visible((By.CLASS_NAME, "admin-heading"))
         # Check whether form has been rendered on page by checking headings
         page.wait_until_visible((By.XPATH, "//h3[text()='General']"))
@@ -48,8 +48,7 @@ def view_search_page(webdriver, datasets):
 
     @print_timing("selenium_approvals_view_search_page")
     def measure():
-        # TODO Replace with CONFLUENCE_SETTINGS.server_url
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/approvalmacro/main")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/approvalmacro/main")
         # check my approvals tab has rendered
         page.wait_until_visible((By.XPATH, "//div[text()='My Approvals']"))
         # check statistics tab has rendered
@@ -62,9 +61,10 @@ def view_space_settings(webdriver, datasets):
 
     @print_timing("selenium_approvals_view_space_settings")
     def measure():
-        # TODO Replace with CONFLUENCE_SETTINGS.server_url + add random space key
-        page.go_to_url("http://localhost:1990/confluence/plugins/approvalmacro/space/configure.action?key=TS")
-        # Check settings container has rendered
+        space_key = random.choice(SPACE_KEYS)
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/approvalmacro/space/configure.action?key={space_key}")
+
+    # Check settings container has rendered
         page.wait_until_visible((By.CLASS_NAME, "ac-approval-container"))
         # Check whether form has been rendered on page by checking headings
         page.wait_until_visible((By.XPATH, "//h3[text()='Configuration']"))
