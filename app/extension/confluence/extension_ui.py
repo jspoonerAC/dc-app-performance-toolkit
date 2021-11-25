@@ -35,13 +35,24 @@ def view_config_page(webdriver, datasets):
         # page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/pages/viewpage.action/plugins/servlet/approvalmacro/system/configuration")
         page.go_to_url("http://localhost:1990/confluence/plugins/servlet/approvalmacro/system/configuration")
         page.wait_until_visible((By.CLASS_NAME, "admin-heading"))
-        # Check whether form has been rendered on page
+        # Check whether form has been rendered on page by checking headings
         page.wait_until_visible((By.XPATH, "//h3[text()='General']"))
+        page.wait_until_visible((By.XPATH, "//h3[text()='Notifications']"))
+        page.wait_until_visible((By.XPATH, "//h3[text()='Permissions']"))
+        page.wait_until_visible((By.XPATH, "//h3[text()='Terminology']"))
     measure()
 
 
 def view_search_page(webdriver, datasets):
-    # TODO Implement
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_approvals_view_search_page")
     def measure():
-        pass
+        # TODO Replace with CONFLUENCE_SETTINGS.server_url
+        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/approvalmacro/main")
+        # check my approvals tab has rendered
+        page.wait_until_visible((By.XPATH, "//div[text()='My Approvals']"))
+        # check statistics tab has rendered
+        page.wait_until_visible((By.XPATH, "//div[text()='Statistics']"))
+    measure()
 
