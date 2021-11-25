@@ -56,3 +56,18 @@ def view_search_page(webdriver, datasets):
         page.wait_until_visible((By.XPATH, "//div[text()='Statistics']"))
     measure()
 
+
+def view_space_settings(webdriver, datasets):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_approvals_view_space_settings")
+    def measure():
+        # TODO Replace with CONFLUENCE_SETTINGS.server_url + add random space key
+        page.go_to_url("http://localhost:1990/confluence/plugins/approvalmacro/space/configure.action?key=TS")
+        # Check settings container has rendered
+        page.wait_until_visible((By.CLASS_NAME, "ac-approval-container"))
+        # Check whether form has been rendered on page by checking headings
+        page.wait_until_visible((By.XPATH, "//h3[text()='Configuration']"))
+        page.wait_until_visible((By.XPATH, "//h3[text()='Permissions']"))
+        page.wait_until_visible((By.XPATH, "//h3[text()='Teams']"))
+    measure()
