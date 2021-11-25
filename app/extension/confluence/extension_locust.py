@@ -3,7 +3,18 @@ from locustio.common_utils import init_logger, confluence_measure, run_as_specif
 
 logger = init_logger(app_type='confluence')
 
-
+    """
+        TODO Add locust tasks for the following:
+            Create Page Approvals
+            Action Page Approvals
+            Get page approval
+            modify global settings
+            modify space settings
+            search approvals
+            Create macro approval
+            Get macro approval
+            Action macro approval
+    """
 @confluence_measure("locust_app_specific_action")
 # @run_as_specific_user(username='admin', password='admin')  # run as specific user
 def app_specific_action(locust):
