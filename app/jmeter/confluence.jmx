@@ -11358,11 +11358,11 @@ if (response_data.username != vars.get(&quot;username&quot;)) {
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.domain">confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com</stringProp>
+                <stringProp name="HTTPSampler.port">80</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/rest/approvalmacro/1.0/settings/system</stringProp>
+                <stringProp name="HTTPSampler.path">/rest/approvalmacro/1.0/settings/system</stringProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -11403,6 +11403,26 @@ if (response_data.username != vars.get(&quot;username&quot;)) {
                 </HeaderManager>
                 <hashTree/>
               </hashTree>
+              <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+                <collectionProp name="AuthManager.auth_list">
+                  <elementProp name="" elementType="Authorization">
+                    <stringProp name="Authorization.url">http://localhost:1990/confluence</stringProp>
+                    <stringProp name="Authorization.username">admin</stringProp>
+                    <stringProp name="Authorization.password">admin</stringProp>
+                    <stringProp name="Authorization.domain"></stringProp>
+                    <stringProp name="Authorization.realm"></stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Authorization">
+                    <stringProp name="Authorization.url">http://confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com/</stringProp>
+                    <stringProp name="Authorization.username">admin</stringProp>
+                    <stringProp name="Authorization.password">admin</stringProp>
+                    <stringProp name="Authorization.domain"></stringProp>
+                    <stringProp name="Authorization.realm"></stringProp>
+                  </elementProp>
+                </collectionProp>
+                <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+              </AuthManager>
+              <hashTree/>
             </hashTree>
             <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_modify_approvals_space_settings" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
@@ -11422,11 +11442,11 @@ if (response_data.username != vars.get(&quot;username&quot;)) {
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.domain">http://confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com</stringProp>
+                <stringProp name="HTTPSampler.port">80</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/rest/approvalmacro/1.0/settings/space?key=${space_key}</stringProp>
+                <stringProp name="HTTPSampler.path">/rest/approvalmacro/1.0/settings/space?key=${space_key}</stringProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -11467,6 +11487,26 @@ if (response_data.username != vars.get(&quot;username&quot;)) {
                 </HeaderManager>
                 <hashTree/>
               </hashTree>
+              <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+                <collectionProp name="AuthManager.auth_list">
+                  <elementProp name="" elementType="Authorization">
+                    <stringProp name="Authorization.url">http://localhost:1990/confluence</stringProp>
+                    <stringProp name="Authorization.username">admin</stringProp>
+                    <stringProp name="Authorization.password">admin</stringProp>
+                    <stringProp name="Authorization.domain"></stringProp>
+                    <stringProp name="Authorization.realm"></stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Authorization">
+                    <stringProp name="Authorization.url">http://confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com/</stringProp>
+                    <stringProp name="Authorization.username">admin</stringProp>
+                    <stringProp name="Authorization.password">admin</stringProp>
+                    <stringProp name="Authorization.domain"></stringProp>
+                    <stringProp name="Authorization.realm"></stringProp>
+                  </elementProp>
+                </collectionProp>
+                <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+              </AuthManager>
+              <hashTree/>
             </hashTree>
             <TestAction guiclass="TestActionGui" testclass="TestAction" testname="pacing - end" enabled="true">
               <intProp name="ActionProcessor.action">1</intProp>
