@@ -400,28 +400,29 @@ SPACE_KEYS = ["APATD", "ASLC", "ATA", "ABE", "AOSTD", "ASW", "AAPC", "ARECP", "A
               "ZLPS"]
 
 
+def app_specific_user_login(webdriver, username='admin', password='admin'):
+    login_page = Login(webdriver)
+    login_page.delete_all_cookies()
+    login_page.go_to()
+    login_page.wait_for_page_loaded()
+    login_page.set_credentials(username=username, password=password)
+    login_page.click_login_button()
+    if login_page.is_first_login():
+        login_page.first_user_setup()
+    all_updates_page = AllUpdates(webdriver)
+    all_updates_page.wait_for_page_loaded()
+
+
 def app_login_page(webdriver, datasets):
     @print_timing("selenium_app_specific_user_login")
     def measure():
-        def app_specific_user_login(username='admin', password='admin'):
-            login_page = Login(webdriver)
-            login_page.delete_all_cookies()
-            login_page.go_to()
-            login_page.wait_for_page_loaded()
-            login_page.set_credentials(username=username, password=password)
-            login_page.click_login_button()
-            if login_page.is_first_login():
-                login_page.first_user_setup()
-            all_updates_page = AllUpdates(webdriver)
-            all_updates_page.wait_for_page_loaded()
-
-        app_specific_user_login(username='admin', password='admin')
-
+        app_specific_user_login(webdriver, username='admin', password='admin')
     measure()
 
 
 def view_config_page(webdriver, datasets):
     page = BasePage(webdriver)
+    app_specific_user_login(webdriver, username='admin', password='admin')
 
     @print_timing("selenium_approvals_view_config_page")
     def measure():
