@@ -10921,11 +10921,7 @@ if ( sleep_time &gt; 0 ) {
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">2</intProp>
-            <FloatProperty>
-              <name>ThroughputController.percentThroughput</name>
-              <value>2.0</value>
-              <savedValue>0.0</savedValue>
-            </FloatProperty>
+            <stringProp name="ThroughputController.percentThroughput">${perc_standalone_extension}</stringProp>
           </ThroughputController>
           <hashTree>
             <TestAction guiclass="TestActionGui" testclass="TestAction" testname="pacing - start" enabled="true">
@@ -11005,7 +11001,7 @@ if ( sleep_time &gt; 0 ) {
                 <stringProp name="HTTPSampler.port"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${applicatio_postfix}/dologin.action</stringProp>
+                <stringProp name="HTTPSampler.path">${application_postfix}/dologin.action</stringProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
