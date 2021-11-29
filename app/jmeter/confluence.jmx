@@ -11442,7 +11442,7 @@ if (response_data.username != vars.get(&quot;username&quot;)) {
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain">http://confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com</stringProp>
+                <stringProp name="HTTPSampler.domain">confl-loadb-kayhvf7aozip-249212032.eu-west-1.elb.amazonaws.com</stringProp>
                 <stringProp name="HTTPSampler.port">80</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
