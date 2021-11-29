@@ -15,22 +15,22 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="application.hostname" elementType="Argument">
             <stringProp name="Argument.name">application.hostname</stringProp>
-            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.value"> ${__lowercase(${__P(application_hostname, your_confluence_instance)})} </stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="application.port" elementType="Argument">
             <stringProp name="Argument.name">application.port</stringProp>
-            <stringProp name="Argument.value">1990</stringProp>
+            <stringProp name="Argument.value">${__P(application_port, 80)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="application.protocol" elementType="Argument">
             <stringProp name="Argument.name">application.protocol</stringProp>
-            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.value">${__P(application_protocol, http)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="application.postfix" elementType="Argument">
             <stringProp name="Argument.name">application.postfix</stringProp>
-            <stringProp name="Argument.value">confluence</stringProp>
+            <stringProp name="Argument.value">${__P(application_postfix,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -198,7 +198,7 @@
 </stringProp>
         </Arguments>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_login_and_view_dashboard" enabled="false">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_login_and_view_dashboard" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">true</boolProp>
         </TransactionController>
@@ -209,14 +209,14 @@
                 <elementProp name="os_username" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">os_username</stringProp>
-                  <stringProp name="Argument.value">admin</stringProp>
+                  <stringProp name="Argument.value">${username}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="os_password" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">os_password</stringProp>
-                  <stringProp name="Argument.value">admin</stringProp>
+                  <stringProp name="Argument.value">${password}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
@@ -755,7 +755,7 @@
           <intProp name="LoopController.loops">-1</intProp>
         </LoopController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="blogs" enabled="false">
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="blogs" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="filename">datasets/confluence/blogs.csv</stringProp>
@@ -770,7 +770,7 @@
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="pages" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="filename">/Users/michael/Documents/development/dc-app-performance-toolkit/app/datasets/confluence/pages.csv</stringProp>
+            <stringProp name="filename">datasets/confluence/pages.csv</stringProp>
             <boolProp name="ignoreFirstLine">false</boolProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>
@@ -779,7 +779,7 @@
             <stringProp name="variableNames">page_id,space_key</stringProp>
           </CSVDataSet>
           <hashTree/>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="files upload" enabled="false">
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="files upload" enabled="true">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="filename">datasets/confluence/static-content/files_upload.csv</stringProp>
@@ -791,7 +791,7 @@
             <stringProp name="variableNames">file_path,file_type,file_name</stringProp>
           </CSVDataSet>
           <hashTree/>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_page" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_page" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1727,7 +1727,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_dashboard" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_dashboard" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -2165,7 +2165,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_blog" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_blog" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -3008,7 +3008,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="search_cql" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="search_cql" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -3248,7 +3248,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="create_blog" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="create_blog" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -5243,7 +5243,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="create_and_edit_page" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="create_and_edit_page" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -8723,7 +8723,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="comment_page" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="comment_page" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -9120,7 +9120,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_attachment" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="view_attachment" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -9951,7 +9951,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="upload_attachment" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="upload_attachment" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -10684,7 +10684,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="like_page" enabled="false">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="like_page" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
