@@ -8,12 +8,10 @@ from selenium_ui.confluence.pages.pages import Login, AllUpdates
 from util.conf import CONFLUENCE_SETTINGS
 
 """ TODO Add selenium actions for the following:
-    View Compliance Search Page
     View global search page - click various tabs?
     View Global Detection Page - click varous tabs?
     View Automation Page
     View Log Page - Click tabs
-    View Compliance Space Tab - Maybe add methods to click the various tabs?
     View Compliance Profile Search
 """
 
@@ -34,6 +32,16 @@ def app_login_page(webdriver, datasets):
             all_updates_page.wait_for_page_loaded()
         app_specific_user_login(username='admin', password='admin')
     measure()
+
+
+def click_tab(webdriver, tab_name):
+    tab = webdriver.find_element(By.XPATH, f"//div[text()='{tab_name}']")
+    tab.click()
+
+
+def click_tab_and_check_heading(page, webdriver, tab_name, heading):
+    click_tab(webdriver, tab_name)
+    page.wait_until_visible((By.XPATH, f"//h3[text()='{heading}']"))
 
 
 def view_config_page(webdriver, datasets):
@@ -58,40 +66,53 @@ def view_config_page(webdriver, datasets):
         page.wait_until_visible((By.XPATH, "//div[text()=' Macro Options']"))
         page.wait_until_visible((By.XPATH, "//div[text()=' Bulk Change']"))
 
-        def click_tab_and_view(tab_name, heading):
-            tab = webdriver.find_element(By.XPATH, f"//div[text()='{tab_name}']")
-            tab.click()
-            page.wait_until_visible((By.XPATH, f"//h3[text()='{heading}']"))
+
 
         @print_timing("selenium_compliance_view_config_page:classification_levels")
         def sub_measure():
-            click_tab_and_view(" Classification Levels ", "Classification Levels")
+            click_tab_and_check_heading(page, webdriver, " Classification Levels ", "Classification Levels")
         sub_measure()
 
         @print_timing("selenium_compliance_view_config_page:global_options")
         def sub_measure():
-            click_tab_and_view(" Global Options", "Global Options")
+            click_tab_and_check_heading(page, webdriver, " Global Options", "Global Options")
         sub_measure()
 
         @print_timing("selenium_compliance_view_config_page:statistics")
         def sub_measure():
-            click_tab_and_view(" Statistics", "Statistics")
+            click_tab_and_check_heading(page, webdriver, " Statistics", "Statistics")
         sub_measure()
 
     measure()
 
 
-def view_space_search_page(webdriver, datasets):
+def view_space_page(webdriver, datasets):
     page = BasePage(webdriver)
 
-    @print_timing("selenium_approvals_view_search_page")
+    @print_timing("selenium_compliance_view_space_page")
     def measure():
         # TODO Uncomment code and replace
         # page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/classification")
         # TODO Get random space key from dataset
         space_key = "XME"
         page.go_to_url(f"http://localhost:1990/confluence/plugins/compliance/search.action?spaceKey={space_key}")
-        # TODO Implement
+        # Check that search page has rendered by checking for export to csv button
+        page.wait_until_visible((By.CLASS_NAME, "export-csv"))
+
+        @print_timing("selenium_compliance_view_space_page:sensitive_data")
+        def sub_measure():
+            click_tab(webdriver, " Sensitive Data Search")
+        sub_measure()
+
+        @print_timing("selenium_compliance_view_space_page:statistics")
+        def sub_measure():
+            click_tab_and_check_heading(page, webdriver, " Statistics", "Statistics")
+        sub_measure()
+
+        @print_timing("selenium_compliance_view_space_page:space_settings")
+        def sub_measure():
+            click_tab_and_check_heading(page, webdriver, " Space Settings", "Space Settings")
+        sub_measure()
 
     measure()
 
