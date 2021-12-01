@@ -8,7 +8,6 @@ from selenium_ui.confluence.pages.pages import Login, AllUpdates
 from util.conf import CONFLUENCE_SETTINGS
 
 """ TODO Add selenium actions for the following:
-    View Log Page - Click tabs
     View Compliance Profile Search
 """
 
@@ -180,3 +179,20 @@ def view_automation_page(webdriver, datasets):
 
     measure()
 
+
+def view_log_page(webdriver, datasets):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_compliance_view_log_page")
+    def measure():
+        # TODO Replace with variable
+        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/audit")
+        # Check heading has rendered
+        __check_h3_has_rendered(page, "Scan Log")
+
+        @print_timing("selenium_compliance_view_log_page:action")
+        def sub_measure():
+            click_tab_and_check_heading(page, webdriver, " Action Log", "Action Log")
+        sub_measure()
+
+    measure()
