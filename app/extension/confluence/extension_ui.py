@@ -8,7 +8,6 @@ from selenium_ui.confluence.pages.pages import Login, AllUpdates
 from util.conf import CONFLUENCE_SETTINGS
 
 """ TODO Add selenium actions for the following:
-    View global search page - click various tabs?
     View Global Detection Page - click varous tabs?
     View Automation Page
     View Log Page - Click tabs
@@ -32,6 +31,10 @@ def app_login_page(webdriver, datasets):
             all_updates_page.wait_for_page_loaded()
         app_specific_user_login(username='admin', password='admin')
     measure()
+
+
+def __check_tab_has_rendered(page, tab_name):
+    page.wait_until_visible(By.XPATH, f"//div[text()='{tab_name}']")
 
 
 def click_tab(webdriver, tab_name):
@@ -115,6 +118,26 @@ def view_space_page(webdriver, datasets):
         sub_measure()
 
     measure()
+
+
+def view_global_search(webdriver, datasets):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_compliance_view_global_search")
+    def measure():
+        # TODO Replace with variable
+        page.go_to_url(f"http://localhost:1990/confluence/plugins/servlet/server-classification/browse")
+        # Check Classification Level Search Tab has rendered
+        __check_tab_has_rendered(page, " Classification Level Search")
+        # Check search bar has rendered
+        page.wait_until_visible((By.CLASS_NAME, "top-search-bar"))
+        click_tab(webdriver, " Sensitive Data Search")
+
+        @print_timing("selenium_compliance_view_global_search:sensitive_data")
+        def sub_measure():
+            click_tab(webdriver, "Sensitive Data Search")
+            # Check table has rendered
+            page.wait_until_visible((By.CLASS_NAME, "tableContainerStyle"))
 
 
 def app_specific_action(webdriver, datasets):
