@@ -8,7 +8,6 @@ from selenium_ui.confluence.pages.pages import Login, AllUpdates
 from util.conf import CONFLUENCE_SETTINGS
 
 """ TODO Add selenium actions for the following:
-    View Global Detection Page - click varous tabs?
     View Automation Page
     View Log Page - Click tabs
     View Compliance Profile Search
@@ -36,6 +35,9 @@ def app_login_page(webdriver, datasets):
 def __check_tab_has_rendered(page, tab_name):
     page.wait_until_visible(By.XPATH, f"//div[text()='{tab_name}']")
 
+
+def __check_h3_has_rendered(page, heading):
+    page.wait_until_visible((By.XPATH, f"//h3[text()='{heading}']"))
 
 def click_tab(webdriver, tab_name):
     tab = webdriver.find_element(By.XPATH, f"//div[text()='{tab_name}']")
@@ -138,6 +140,34 @@ def view_global_search(webdriver, datasets):
             click_tab(webdriver, "Sensitive Data Search")
             # Check table has rendered
             page.wait_until_visible((By.CLASS_NAME, "tableContainerStyle"))
+
+
+def view_detection_page(webdriver, datasets):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_compliance_view_detection_page")
+    def measure():
+        # TODO Replace with variable
+        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/analysis")
+        # Check get started page has rendered
+        __check_h3_has_rendered(page, "Get Started")
+
+        @print_timing("selenium_compliance_view_detection_page:extractions")
+        def sub_measure():
+            click_tab_and_check_heading(page, webdriver, " Extractions ", "Extractions")
+        sub_measure()
+
+        @print_timing("selenium_compliance_view_detection_page:scan_options")
+        def sub_measure():
+            click_tab_and_check_heading(page, webdriver, " Scan Options ", "Scan Options")
+            # Check progress bar has rendered
+            page.wait_until_visible((By.CLASS_NAME, "progress-bar-container"))
+
+            # Check scan button has rendered
+            page.wait_until_visible((By.CLASS_NAME, "scan-btn"))
+        sub_measure()
+    measure()
+
 
 
 def app_specific_action(webdriver, datasets):
