@@ -196,3 +196,16 @@ def view_log_page(webdriver, datasets):
         sub_measure()
 
     measure()
+
+
+def view_compliance_profile_tab(webdriver, datasets):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_compliance_view_profile_tab")
+    def measure():
+        # TODO Replace with variable
+        page.go_to_url("http://localhost:1990/confluence/plugins/compliance/profile.action")
+        page.wait_until_visible((By.CLASS_NAME, "top-search-bar"))
+        page.wait_until_visible((By.CLASS_NAME, "export-csv"))
+
+
