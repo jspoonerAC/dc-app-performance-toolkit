@@ -88,12 +88,16 @@ def view_config_page(webdriver, datasets):
 
 
 def view_space_page(webdriver, datasets):
+
+    def get_random_space_key():
+        random_page = random.choice(datasets["pages"])
+        return random_page[1]
+
     page = BasePage(webdriver)
 
     @print_timing("selenium_compliance_view_space_page")
     def measure():
-        # TODO Get random space key from dataset
-        space_key = "XME"
+        space_key = get_random_space_key()
         page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/compliance/search.action?spaceKey={space_key}")
         # Check that search page has rendered by checking for export to csv button
         page.wait_until_visible((By.CLASS_NAME, "export-csv"))
