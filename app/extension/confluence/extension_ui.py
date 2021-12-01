@@ -52,9 +52,7 @@ def view_config_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_config_page")
     def measure():
-        # TODO Uncomment code and replace
-        # page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/classification")
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/classification")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/classification")
         page.wait_until_visible((By.CLASS_NAME, "admin-heading"))
         # Check whether get started page has been rendered
         page.wait_until_visible((By.XPATH, "//h3[text()='Get Started']"))
@@ -94,11 +92,9 @@ def view_space_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_space_page")
     def measure():
-        # TODO Uncomment code and replace
-        # page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/classification")
         # TODO Get random space key from dataset
         space_key = "XME"
-        page.go_to_url(f"http://localhost:1990/confluence/plugins/compliance/search.action?spaceKey={space_key}")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/compliance/search.action?spaceKey={space_key}")
         # Check that search page has rendered by checking for export to csv button
         page.wait_until_visible((By.CLASS_NAME, "export-csv"))
 
@@ -125,8 +121,7 @@ def view_global_search(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_global_search")
     def measure():
-        # TODO Replace with variable
-        page.go_to_url(f"http://localhost:1990/confluence/plugins/servlet/server-classification/browse")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/browse")
         # Check Classification Level Search Tab has rendered
         __check_tab_has_rendered(page, " Classification Level Search")
         # Check search bar has rendered
@@ -145,8 +140,7 @@ def view_detection_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_detection_page")
     def measure():
-        # TODO Replace with variable
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/analysis")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/analysis")
         # Check get started page has rendered
         __check_h3_has_rendered(page, "Get Started")
 
@@ -172,8 +166,7 @@ def view_automation_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_automation_page")
     def measure():
-        # TODO Replace with variable
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/automation")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/automation")
         # Check heading has rendered
         page.wait_until_visible((By.XPATH, "//h2[text()='Automation']"))
 
@@ -185,8 +178,7 @@ def view_log_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_log_page")
     def measure():
-        # TODO Replace with variable
-        page.go_to_url("http://localhost:1990/confluence/plugins/servlet/server-classification/audit")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/audit")
         # Check heading has rendered
         __check_h3_has_rendered(page, "Scan Log")
 
@@ -203,8 +195,7 @@ def view_compliance_profile_tab(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_profile_tab")
     def measure():
-        # TODO Replace with variable
-        page.go_to_url("http://localhost:1990/confluence/plugins/compliance/profile.action")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/compliance/profile.action")
         page.wait_until_visible((By.CLASS_NAME, "top-search-bar"))
         page.wait_until_visible((By.CLASS_NAME, "export-csv"))
 
