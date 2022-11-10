@@ -456,7 +456,7 @@ def view_space_settings(webdriver, datasets):
     @print_timing("selenium_approvals_view_space_settings")
     def measure():
         space_key = random.choice(SPACE_KEYS)
-        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/approvalmacro/space/configure.action?key={space_key}")
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/approvalmacro/space/configure.action?key=TEST") # replace TEST with {space_key} when not working on local machine
 
         # Check settings container has rendered
         page.wait_until_visible((By.CLASS_NAME, "ac-approval-container"))
