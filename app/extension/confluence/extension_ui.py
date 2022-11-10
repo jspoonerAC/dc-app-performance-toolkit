@@ -170,6 +170,8 @@ def view_automation_page(webdriver, datasets):
 
     @print_timing("selenium_compliance_view_automation_page")
     def measure():
+        print('------- TEST -------')
+        print(CONFLUENCE_SETTINGS.server_url)
         page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/automation")
         # Check heading has rendered
         page.wait_until_visible((By.XPATH, "//h2[text()='Automation']"))
