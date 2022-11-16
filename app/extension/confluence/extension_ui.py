@@ -191,6 +191,18 @@ def view_log_page(webdriver, datasets):
     measure()
 
 
+def view_task_manager_page(webdriver):
+    page = BasePage(webdriver)
+
+    @print_timing("selenium_compliance_view_task_manager_page")
+    def measure():
+        page.go_to_url(f"{CONFLUENCE_SETTINGS.server_url}/plugins/servlet/server-classification/task-manager")
+        # Check heading has rendered
+        page.wait_until_visible((By.XPATH, "//h1[text()='Task Manager']"))
+
+    measure()
+
+
 def view_compliance_profile_tab(webdriver, datasets):
     page = BasePage(webdriver)
 
