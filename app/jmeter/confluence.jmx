@@ -11,31 +11,6 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables" enabled="false">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="application.hostname" elementType="Argument">
-            <stringProp name="Argument.name">application.hostname</stringProp>
-            <stringProp name="Argument.value">${__lowercase(${__P(application_hostname, your_confluence_instance)})}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="application.port" elementType="Argument">
-            <stringProp name="Argument.name">application.port</stringProp>
-            <stringProp name="Argument.value">${__P(application_port, 80)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="application.protocol" elementType="Argument">
-            <stringProp name="Argument.name">application.protocol</stringProp>
-            <stringProp name="Argument.value">${__P(application_protocol, http)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="application.postfix" elementType="Argument">
-            <stringProp name="Argument.name">application.postfix</stringProp>
-            <stringProp name="Argument.value">${__P(application_postfix,)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables Test" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="application.hostname" elementType="Argument">
